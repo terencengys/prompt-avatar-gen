@@ -1,14 +1,140 @@
 {
     "astronaut": {
-
+        "clothing": [
+            "spacesuit"
+        ],
+        "clothing_acc": [
+            "country patch",
+            "jetpack",
+            "antenna"
+        ],
+        "eyewear": [
+            "helmet visor",
+            "helmet"
+        ],
+        "background": [
+            "outer space",
+            "galaxy",
+            "nebula",
+            "planet",
+            "stars",
+            "starfield"
+        ]
     },
     "cyborg": {
-
+        "clothing": [
+            "android",
+            "skin suit",
+            "robot"
+        ],
+        "clothing_acc": [
+            "circuit board face tattoo",
+            "exposed wires",
+            "neon glow",
+            "headphones"
+        ],
+        "eyewear": [
+            "wraparound sunglasses",
+            "visor",
+            "helmet",
+            "glowing eyes",
+            "shades"
+        ],
+        "background": [
+            "cyberpunk",
+            "biopunk",
+            "cityscape",
+            "futuristic",
+            "neon"
+        ]
     },
     "fantasy": {
-
+        "clothing": [
+            "tunic",
+            "elf",
+            "dwarf",
+            "orc",
+            "wizard",
+            "sorcerer",
+            "paladin"
+        ],
+        "clothing_acc": [
+            "sword",
+            "bow and arrow",
+            "leather bag",
+            "armor",
+            "magic wand"
+        ],
+        "eyewear": [
+            "pointy ears",
+            "glowing eyes"
+        ],
+        "background": [
+            "forest",
+            "elven city",
+            "fantasy village",
+            "runes",
+            "magical glow"
+        ]
     },
     "business": {
-
+        "clothing": [
+            "suit",
+            "button down shirt",
+            "suit and tie"
+        ],
+        "clothing_acc": [
+            "tie",
+            "necktie",
+            "bowtie",
+            "cigarette",
+            "fedora",
+            "bowler hat"
+        ],
+        "eyewear": [
+            "sunglasses",
+            "glasses"
+        ],
+        "background": [
+            "cityscape",
+            "sports car",
+            "new york",
+            "night city",
+            "money"
+        ]
+    },
+    "steampunk": {
+        "clothing": [
+            "shirt"
+        ],
+        "clothing_acc": [
+            "pocketwatch",
+            "top hat"
+        ],
+        "eyewear": [
+            "brass goggles",
+            "monocle",
+            "tinted goggles"
+        ],
+        "background": [
+            "steam train",
+            "brass fittings",
+            "roman clock",
+            "victorian London",
+            "train station",
+            "industrial",
+            "19th century",
+            "clockwork"
+        ]
+    },
+    "template": {
+        "clothing": [
+        ],
+        "clothing_acc": [
+        ],
+        "eyewear": [
+        ],
+        "background": [
+        ]
     }
 }

@@ -7,14 +7,64 @@ THEMES_JSON = "themes.json"
 
 def build_prompt(gender, theme):
     # Main prompt builder function
-    # character_json, themes_json = read_both_jsons(CHARACTER_JSON, THEMES_JSON)
+    character_json, themes_json = read_both_jsons(CHARACTER_JSON, THEMES_JSON)
     
     if theme == "random":
         theme = random.choice(get_themes_list())
-    return theme
+
+    color_list = character_json["colors"]
+
+    # Gender
+    gender_str = sample_gender(gender)
+
+    # Facial features (may be omitted if using controlnet on photographs)
+    face_str = f"{random.choice(color_list)} eyes, {random.choice(color_list)} hair, "
+
+    # Facial expressions (TODO)
+
+    # Clothing
+    # Max 1, color modifier
+    clothing_list = themes_json[theme]["clothing"]
+    clothing_str = sample_and_join(clothing_list, 1)
+    clothing_str = f"{random.choice(color_list)} {clothing_str}"
+
+    # Clothing Accessories
+    # Max _, color modifier
+    clothing_acc_list =  themes_json[theme]["clothing_acc"]
+    print(clothing_acc_list)
+
+    for index, value in enumerate(clothing_acc_list):
+        clothing_acc_list[index] = f"{random.choice(color_list)} {value}"
+
+    clothing_acc_str = random_sample_and_join(clothing_acc_list)
+
+    # Eyewear
+    # Max 1
+    eyewear_list = themes_json[theme]["eyewear"]
+    eyewear_str = random_sample_and_join(eyewear_list)
+
+    # Background
+    # Max 1/3 of total no. of elements
+    background_list = themes_json[theme]["background"]
+    background_str = random_sample_and_join(background_list, False)
+    
+    prompt_str = make_into_list_and_join(
+        gender_str,
+        face_str,
+        clothing_str,
+        clothing_acc_str,
+        eyewear_str,
+        background_str
+        ).replace(', , ', ', ')
+    
+    return f"{theme}, {prompt_str.replace(', , ', ', ')}"
 
 def get_themes_list():
     # Read and return list of themes
     _, themes_json = read_both_jsons(CHARACTER_JSON, THEMES_JSON)
     themes_list = list(themes_json.keys())
-    return themes_list
+    themes_list.remove("template")
+    return(themes_list)
+
+# if __name__ == "__main__":
+#     print(build_prompt('male', 'astronaut'))
