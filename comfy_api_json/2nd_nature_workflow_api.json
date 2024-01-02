@@ -1,0 +1,382 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "sd_xl_base_1.0_0.9vae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "2": {
+    "inputs": {
+      "ckpt_name": "sd_xl_refiner_1.0.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "5": {
+    "inputs": {
+      "width": [
+        "96",
+        0
+      ],
+      "height": [
+        "99",
+        0
+      ],
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": [
+        "96",
+        0
+      ],
+      "target_height": [
+        "99",
+        0
+      ],
+      "text_g": [
+        "78",
+        0
+      ],
+      "text_l": [
+        "79",
+        0
+      ],
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXL"
+  },
+  "16": {
+    "inputs": {
+      "width": [
+        "96",
+        0
+      ],
+      "height": [
+        "99",
+        0
+      ],
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": [
+        "96",
+        0
+      ],
+      "target_height": [
+        "99",
+        0
+      ],
+      "text_g": "Surreal, deformed, uncanny, caricature, black and white, monochrome, vector, line art, ",
+      "text_l": "Surreal, deformed, uncanny, caricature, black and white, monochrome, vector, line art, ",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXL"
+  },
+  "29": {
+    "inputs": {
+      "ascore": 6,
+      "width": [
+        "96",
+        0
+      ],
+      "height": [
+        "99",
+        0
+      ],
+      "text": "Surreal, deformed, uncanny, caricature, black and white, monochrome, vector, line art, ",
+      "clip": [
+        "2",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXLRefiner"
+  },
+  "34": {
+    "inputs": {
+      "ascore": 6,
+      "width": [
+        "96",
+        0
+      ],
+      "height": [
+        "99",
+        0
+      ],
+      "text": [
+        "86",
+        0
+      ],
+      "clip": [
+        "2",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXLRefiner"
+  },
+  "54": {
+    "inputs": {
+      "samples": [
+        "59",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "57": {
+    "inputs": {
+      "images": [
+        "54",
+        0
+      ]
+    },
+    "class_type": "PreviewImage"
+  },
+  "58": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": [
+        "156",
+        0
+      ],
+      "steps": [
+        "154",
+        0
+      ],
+      "cfg": 5,
+      "sampler_name": "dpm_2",
+      "scheduler": "karras",
+      "start_at_step": [
+        "153",
+        0
+      ],
+      "end_at_step": [
+        "155",
+        0
+      ],
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "16",
+        0
+      ],
+      "latent_image": [
+        "160",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced"
+  },
+  "59": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": [
+        "156",
+        0
+      ],
+      "steps": [
+        "154",
+        0
+      ],
+      "cfg": 3.5,
+      "sampler_name": "dpm_2_ancestral",
+      "scheduler": "karras",
+      "start_at_step": [
+        "155",
+        0
+      ],
+      "end_at_step": [
+        "154",
+        0
+      ],
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "2",
+        0
+      ],
+      "positive": [
+        "34",
+        0
+      ],
+      "negative": [
+        "29",
+        0
+      ],
+      "latent_image": [
+        "58",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced"
+  },
+  "76": {
+    "inputs": {
+      "Value": 1024
+    },
+    "class_type": "Integer"
+  },
+  "77": {
+    "inputs": {
+      "Value": 1024
+    },
+    "class_type": "Integer"
+  },
+  "78": {
+    "inputs": {
+      "text_a": [
+        "84",
+        0
+      ],
+      "text_b": [
+        "83",
+        0
+      ],
+      "linebreak_addition": "false",
+      "delimiter": ""
+    },
+    "class_type": "Text Concatenate"
+  },
+  "79": {
+    "inputs": {
+      "text_a": [
+        "83",
+        0
+      ],
+      "text_b": [
+        "83",
+        0
+      ],
+      "linebreak_addition": "false",
+      "delimiter": ""
+    },
+    "class_type": "Text Concatenate"
+  },
+  "83": {
+    "inputs": {
+      "Text": "female, astronaut, open helmet, spacesuit, among stars, galaxies, "
+    },
+    "class_type": "Text box"
+  },
+  "84": {
+    "inputs": {
+      "Text": "detailed 3d render of a headshot in anime style, cartoon style, looking forward, "
+    },
+    "class_type": "Text box"
+  },
+  "86": {
+    "inputs": {
+      "text_a": [
+        "83",
+        0
+      ],
+      "text_b": [
+        "84",
+        0
+      ],
+      "linebreak_addition": "false",
+      "delimiter": ""
+    },
+    "class_type": "Text Concatenate"
+  },
+  "93": {
+    "inputs": {
+      "Value": [
+        "76",
+        0
+      ]
+    },
+    "class_type": "Int to float"
+  },
+  "94": {
+    "inputs": {
+      "Value_A": [
+        "93",
+        0
+      ],
+      "Value_B": 2
+    },
+    "class_type": "Multiply"
+  },
+  "96": {
+    "inputs": {
+      "float": [
+        "94",
+        0
+      ]
+    },
+    "class_type": "floatToInt _O"
+  },
+  "97": {
+    "inputs": {
+      "Value": [
+        "77",
+        0
+      ]
+    },
+    "class_type": "Int to float"
+  },
+  "98": {
+    "inputs": {
+      "Value_A": [
+        "97",
+        0
+      ],
+      "Value_B": 2
+    },
+    "class_type": "Multiply"
+  },
+  "99": {
+    "inputs": {
+      "float": [
+        "98",
+        0
+      ]
+    },
+    "class_type": "floatToInt _O"
+  },
+  "153": {
+    "inputs": {
+      "Value": 6
+    },
+    "class_type": "Integer"
+  },
+  "154": {
+    "inputs": {
+      "Value": 85
+    },
+    "class_type": "Integer"
+  },
+  "155": {
+    "inputs": {
+      "Value": 70
+    },
+    "class_type": "Integer"
+  },
+  "156": {
+    "inputs": {
+      "seed": 673880482981704
+    },
+    "class_type": "seed _O"
+  },
+  "160": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  }
+}
