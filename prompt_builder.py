@@ -1,9 +1,23 @@
 import random
 from utils import *
 import json
+import uuid
+import configparser
+import websocket
+
+client_id = str(uuid.uuid4())
 
 CHARACTER_JSON = "character.json"
 THEMES_JSON = "themes.json"
+CONFIG_INI = "config.ini"
+
+config = configparser.ConfigParser()
+config.read(CONFIG_INI)
+
+COMFY_SERVER = config.get("Comfy", "COMFY_SERVER")
+# OUTPUT_DIR = config.get("Comfy", "OUTPUT_DIR")
+API_JSON = config.get("Comfy", "API_JSON")
+PROMPT_FIELD_LOC = config.get("Comfy", "PROMPT_FIELD_LOC")
 
 def build_prompt(gender, theme):
     # Main prompt builder function
@@ -31,7 +45,6 @@ def build_prompt(gender, theme):
     # Clothing Accessories
     # Max _, color modifier
     clothing_acc_list =  themes_json[theme]["clothing_acc"]
-    print(clothing_acc_list)
 
     for index, value in enumerate(clothing_acc_list):
         clothing_acc_list[index] = f"{random.choice(color_list)} {value}"
@@ -57,7 +70,19 @@ def build_prompt(gender, theme):
         background_str
         ).replace(', , ', ', ')
     
-    return f"{theme}, {prompt_str.replace(', , ', ', ')}"
+    gen_prompt = f"{theme}, {prompt_str.replace(', , ', ', ')}, "
+    
+    with open(API_JSON) as file:
+        api_json = json.load(file)
+
+    api_json[PROMPT_FIELD_LOC]["inputs"]["text"] = gen_prompt
+
+    ws = websocket.WebSocket()
+
+    ws.connect(f"ws://{COMFY_SERVER[7:]}/ws?clientId={client_id}")
+    images = get_images(ws, api_json, COMFY_SERVER, client_id)
+
+    return images
 
 def get_themes_list():
     # Read and return list of themes

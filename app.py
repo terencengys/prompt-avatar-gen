@@ -3,6 +3,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from fastapi.responses import Response
 import configparser
 
 from prompt_builder import get_themes_list, build_prompt
@@ -39,8 +40,8 @@ async def get_themes():
 @app.post("/create")
 # Post to create avatar
 async def create_avatar(create_prompt: CreatePrompt):
-    prompt = build_prompt(create_prompt.gender, create_prompt.theme)
-    return prompt
+    output = build_prompt(create_prompt.gender, create_prompt.theme)
+    return Response(content=output, media_type="image/png")
 
 
 if __name__ == "__main__":
