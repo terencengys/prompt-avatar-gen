@@ -20,11 +20,11 @@
       "target_width": 1024,
       "target_height": 1024,
       "text_g": [
-        "79",
+        "83",
         0
       ],
       "text_l": [
-        "79",
+        "84",
         0
       ],
       "clip": [
@@ -87,7 +87,7 @@
         0
       ],
       "vae": [
-        "2",
+        "1",
         2
       ]
     },
@@ -106,8 +106,8 @@
     "inputs": {
       "add_noise": "enable",
       "noise_seed": [
-        "165",
-        3
+        "166",
+        2
       ],
       "steps": 30,
       "cfg": 5,
@@ -139,8 +139,8 @@
     "inputs": {
       "add_noise": "enable",
       "noise_seed": [
-        "165",
-        3
+        "166",
+        2
       ],
       "steps": 7,
       "cfg": 3.5,
@@ -193,7 +193,7 @@
   },
   "83": {
     "inputs": {
-      "Text": "steampunk, female, woman, olive eyes, yellow hair, orange shirt, monocle, steam train, roman clock, 19th century, industrial, "
+      "Text": ""
     },
     "class_type": "Text box"
   },
@@ -211,10 +211,13 @@
     },
     "class_type": "EmptyLatentImage"
   },
-  "165": {
+  "166": {
     "inputs": {
-      "seed": 800510957036361
+      "number_type": "integer",
+      "minimum": 0,
+      "maximum": 0,
+      "seed": 4
     },
-    "class_type": "Seed"
+    "class_type": "Random Number"
   }
 }

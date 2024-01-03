@@ -75,7 +75,7 @@ def build_prompt(gender, theme):
     with open(API_JSON) as file:
         api_json = json.load(file)
 
-    api_json[PROMPT_FIELD_LOC]["inputs"]["text"] = gen_prompt
+    api_json[PROMPT_FIELD_LOC]["inputs"]["Text"] = gen_prompt
 
     ws = websocket.WebSocket()
 
