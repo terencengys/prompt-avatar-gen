@@ -1,0 +1,197 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "sd_xl_turbo_1.0_fp16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "2": {
+    "inputs": {
+      "ckpt_name": "sd_xl_refiner_1.0_0.9vae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "5": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 512,
+      "target_height": 512,
+      "text_g": [
+        "79",
+        0
+      ],
+      "text_l": [
+        "79",
+        0
+      ],
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXL"
+  },
+  "16": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 512,
+      "target_height": 512,
+      "text_g": "Surreal, deformed, uncanny, caricature, black and white, monochrome, vector, line art, ",
+      "text_l": "Surreal, deformed, uncanny, caricature, black and white, monochrome, vector, line art, ",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXL"
+  },
+  "29": {
+    "inputs": {
+      "ascore": 6,
+      "width": 512,
+      "height": 512,
+      "text": "Surreal, deformed, uncanny, caricature, black and white, monochrome, vector, line art, multiple people, ",
+      "clip": [
+        "2",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXLRefiner"
+  },
+  "34": {
+    "inputs": {
+      "ascore": 6,
+      "width": 1024,
+      "height": 1024,
+      "text": [
+        "79",
+        0
+      ],
+      "clip": [
+        "2",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXLRefiner"
+  },
+  "54": {
+    "inputs": {
+      "samples": [
+        "166",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "57": {
+    "inputs": {
+      "images": [
+        "54",
+        0
+      ]
+    },
+    "class_type": "PreviewImage"
+  },
+  "79": {
+    "inputs": {
+      "text_a": [
+        "83",
+        0
+      ],
+      "text_b": [
+        "83",
+        0
+      ],
+      "linebreak_addition": "false",
+      "text_c": [
+        "84",
+        0
+      ],
+      "text_d": [
+        "84",
+        0
+      ],
+      "delimiter": ""
+    },
+    "class_type": "Text Concatenate"
+  },
+  "83": {
+    "inputs": {
+      "Text": "steampunk, female, woman, olive eyes, yellow hair, orange shirt, monocle, steam train, roman clock, 19th century, industrial, "
+    },
+    "class_type": "Text box"
+  },
+  "84": {
+    "inputs": {
+      "Text": "detailed 3d render of a headshot in anime style, close up, cartoon style, looking forward, "
+    },
+    "class_type": "Text box"
+  },
+  "160": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "166": {
+    "inputs": {
+      "add_noise": true,
+      "noise_seed": 656109210023183,
+      "cfg": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "16",
+        0
+      ],
+      "sampler": [
+        "168",
+        0
+      ],
+      "sigmas": [
+        "167",
+        0
+      ],
+      "latent_image": [
+        "160",
+        0
+      ]
+    },
+    "class_type": "SamplerCustom"
+  },
+  "167": {
+    "inputs": {
+      "steps": 1,
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "SDTurboScheduler"
+  },
+  "168": {
+    "inputs": {
+      "sampler_name": "euler_ancestral"
+    },
+    "class_type": "KSamplerSelect"
+  }
+}
