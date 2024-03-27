@@ -1,0 +1,229 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "sd_xl_turbo_1.0_fp16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "5": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 512,
+      "target_height": 512,
+      "text_g": [
+        "79",
+        0
+      ],
+      "text_l": [
+        "79",
+        0
+      ],
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXL",
+    "_meta": {
+      "title": "CLIPTextEncodeSDXL"
+    }
+  },
+  "16": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 512,
+      "target_height": 512,
+      "text_g": "Surreal, deformed, uncanny, caricature, black and white, monochrome, vector, line art, ",
+      "text_l": "Surreal, deformed, uncanny, caricature, black and white, monochrome, vector, line art, ",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncodeSDXL",
+    "_meta": {
+      "title": "CLIPTextEncodeSDXL"
+    }
+  },
+  "54": {
+    "inputs": {
+      "samples": [
+        "177",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "57": {
+    "inputs": {
+      "images": [
+        "54",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "79": {
+    "inputs": {
+      "text_a": [
+        "83",
+        0
+      ],
+      "text_b": [
+        "83",
+        0
+      ],
+      "linebreak_addition": "false",
+      "text_c": [
+        "84",
+        0
+      ],
+      "text_d": [
+        "84",
+        0
+      ],
+      "delimiter": ""
+    },
+    "class_type": "Text Concatenate",
+    "_meta": {
+      "title": "Text Concatenate"
+    }
+  },
+  "83": {
+    "inputs": {
+      "Text": "steampunk, female, woman, olive eyes, yellow hair, orange shirt, monocle, steam train, roman clock, 19th century, industrial, "
+    },
+    "class_type": "Text box",
+    "_meta": {
+      "title": "Text box"
+    }
+  },
+  "84": {
+    "inputs": {
+      "Text": "detailed 3d render of a headshot in anime style, close up, cartoon style, looking forward, "
+    },
+    "class_type": "Text box",
+    "_meta": {
+      "title": "Text box"
+    }
+  },
+  "169": {
+    "inputs": {
+      "image": "input.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "170": {
+    "inputs": {
+      "pixels": [
+        "169",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "177": {
+    "inputs": {
+      "add_noise": "disable",
+      "noise_seed": 7211814363558,
+      "steps": 5,
+      "cfg": 1,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "karras",
+      "start_at_step": 0,
+      "end_at_step": 5,
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "179",
+        0
+      ],
+      "negative": [
+        "16",
+        0
+      ],
+      "latent_image": [
+        "181",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "179": {
+    "inputs": {
+      "strength": 1,
+      "conditioning": [
+        "5",
+        0
+      ],
+      "control_net": [
+        "180",
+        0
+      ],
+      "image": [
+        "169",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "180": {
+    "inputs": {
+      "control_net_name": "sai_xl_canny_128lora.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "181": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  }
+}

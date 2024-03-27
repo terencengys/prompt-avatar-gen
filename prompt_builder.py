@@ -4,6 +4,9 @@ import json
 import uuid
 import configparser
 import websocket
+import face_recognition
+import os
+import cv2
 
 client_id = str(uuid.uuid4())
 
@@ -18,6 +21,8 @@ COMFY_SERVER = config.get("Comfy", "COMFY_SERVER")
 # OUTPUT_DIR = config.get("Comfy", "OUTPUT_DIR")
 API_JSON = config.get("Comfy", "API_JSON")
 PROMPT_FIELD_LOC = config.get("Comfy", "PROMPT_FIELD_LOC")
+INPUT_IMG_DIR = config.get("Comfy", "INPUT_IMG_DIR")
+TEMP_IMG_DIR = config.get("Comfy", "TEMP_IMG_DIR")
 
 def build_prompt(gender, theme):
     # Main prompt builder function
@@ -70,8 +75,11 @@ def build_prompt(gender, theme):
         background_str
         ).replace(', , ', ', ')
     
-    gen_prompt = f"{theme}, {prompt_str.replace(', , ', ', ')}, "
+    return f"{theme}, {prompt_str.replace(', , ', ', ')}, "
     
+def send_prompt(gender, theme):
+    gen_prompt = build_prompt(gender, theme)
+
     with open(API_JSON) as file:
         api_json = json.load(file)
 
@@ -90,6 +98,41 @@ def get_themes_list():
     themes_list = list(themes_json.keys())
     themes_list.remove("template")
     return(themes_list)
+
+def send_prompt_with_img(gender, theme, img):
+    gen_prompt = build_prompt(gender, theme)
+
+    image = img.file.read()
+    with open(f"{TEMP_IMG_DIR}/temp.jpg", "wb") as temp_image_file:
+        temp_image_file.write(image)
+    
+    img_array = face_recognition.load_image_file(f"{TEMP_IMG_DIR}/temp.jpg")[:, :, ::-1]
+    face_locations = face_recognition.face_locations(img_array)
+
+    # Assume only one face per img
+    top, right, bottom, left = face_locations[0]
+    top_1 = top - (bottom-top)//2
+    bottom_1 = bottom + (bottom-top)//2
+    right_1 = right + (right-left)//2
+    left_1 = left - (right-left)//2
+    face_image = cv2.resize(img_array[top_1:bottom_1, left_1:right_1], (512,512))
+    cv2.imwrite(f"{INPUT_IMG_DIR}/input.jpg", face_image)
+    os.remove(f"{TEMP_IMG_DIR}/temp.jpg")
+    
+    with open(API_JSON) as file:
+        api_json = json.load(file)
+
+    api_json[PROMPT_FIELD_LOC]["inputs"]["Text"] = gen_prompt
+
+    ws = websocket.WebSocket()
+
+    ws.connect(f"ws://{COMFY_SERVER[7:]}/ws?clientId={client_id}")
+    images = get_images(ws, api_json, COMFY_SERVER, client_id)
+
+    os.remove(f"{INPUT_IMG_DIR}/input.jpg")
+
+    return images
+
 
 # if __name__ == "__main__":
 #     print(build_prompt('male', 'astronaut'))
