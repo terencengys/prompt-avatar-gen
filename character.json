@@ -15,5 +15,13 @@
         "maroon",
         "orange"
     ],
+    "skin_tone": [
+        "dark",
+        "light",
+        "ebony",
+        "alabaster",
+        "olive",
+        "pale"
+    ],
     "expressions": []
 }

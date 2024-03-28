@@ -25,6 +25,10 @@ INPUT_IMG_DIR = config.get("Comfy", "INPUT_IMG_DIR")
 TEMP_IMG_DIR = config.get("Comfy", "TEMP_IMG_DIR")
 
 def build_prompt(gender, theme):
+    # Convert all to lowercase and remove spaces
+    gender.lower().strip()
+    theme.lower().strip()
+
     # Main prompt builder function
     character_json, themes_json = read_both_jsons(CHARACTER_JSON, THEMES_JSON)
     
@@ -32,12 +36,13 @@ def build_prompt(gender, theme):
         theme = random.choice(get_themes_list())
 
     color_list = character_json["colors"]
+    skin_tone_list = character_json["skin_tone"]
 
     # Gender
     gender_str = sample_gender(gender)
 
     # Facial features (may be omitted if using controlnet on photographs)
-    face_str = f"{random.choice(color_list)} eyes, {random.choice(color_list)} hair, "
+    face_str = f"{random.choice(color_list)} eyes, {random.choice(color_list)} hair, {random.choice(skin_tone_list)} complexion, "
 
     # Facial expressions (TODO)
 

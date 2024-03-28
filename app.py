@@ -25,9 +25,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class CreatePrompt(BaseModel):
-    gender: str
-    theme: str
 
 @app.get("/")
 # Root endpoint
@@ -39,11 +36,11 @@ async def read_root():
 async def get_themes():
     return get_themes_list()
 
-@app.post("/create")
-# Post to create avatar
-async def create_avatar(create_prompt: CreatePrompt):
-    output = send_prompt(create_prompt.gender, create_prompt.theme)
-    return Response(content=output, media_type="image/png")
+# @app.post("/create")
+# # Post to create avatar
+# async def create_avatar(gender: str, theme: str):
+#     output = send_prompt(gender, theme)
+#     return Response(content=output, media_type="image/png")
 
 @app.post("/create-from-img")
 # Post to create avatar from image
