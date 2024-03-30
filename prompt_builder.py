@@ -7,6 +7,7 @@ import websocket
 import face_recognition
 import os
 import cv2
+import numpy as np
 
 client_id = str(uuid.uuid4())
 
@@ -24,10 +25,10 @@ PROMPT_FIELD_LOC = config.get("Comfy", "PROMPT_FIELD_LOC")
 INPUT_IMG_DIR = config.get("Comfy", "INPUT_IMG_DIR")
 TEMP_IMG_DIR = config.get("Comfy", "TEMP_IMG_DIR")
 
-def build_prompt(gender, theme):
+def build_prompt(gender_string, theme_string):
     # Convert all to lowercase and remove spaces
-    gender.lower().strip()
-    theme.lower().strip()
+    gender = gender_string.lower().strip()
+    theme = theme_string.lower().strip()
 
     # Main prompt builder function
     character_json, themes_json = read_both_jsons(CHARACTER_JSON, THEMES_JSON)
@@ -108,10 +109,9 @@ def send_prompt_with_img(gender, theme, img):
     gen_prompt = build_prompt(gender, theme)
 
     image = img.file.read()
-    with open(f"{TEMP_IMG_DIR}/temp.jpg", "wb") as temp_image_file:
-        temp_image_file.write(image)
+    # TODO Resize image if too large as it causes segfault
     
-    img_array = face_recognition.load_image_file(f"{TEMP_IMG_DIR}/temp.jpg")[:, :, ::-1]
+    img_array = cv2.imdecode(np.frombuffer(image,np.uint8), cv2.IMREAD_COLOR)
     face_locations = face_recognition.face_locations(img_array)
 
     # Assume only one face per img
@@ -122,7 +122,6 @@ def send_prompt_with_img(gender, theme, img):
     left_1 = left - (right-left)//2
     face_image = cv2.resize(img_array[top_1:bottom_1, left_1:right_1], (512,512))
     cv2.imwrite(f"{INPUT_IMG_DIR}/input.jpg", face_image)
-    os.remove(f"{TEMP_IMG_DIR}/temp.jpg")
     
     with open(API_JSON) as file:
         api_json = json.load(file)
